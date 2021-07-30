@@ -70,7 +70,7 @@ function soloButton() {
 
     if (fixedTermInvestment.isTimeValid()) {
         const profit = fixedTermInvestment.getProfit();
-        alert('Tu ganancia en ' + days + ' dias será de $' + profit + '.');
+        alert('Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.');
     } else {
         alert('El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
     }
