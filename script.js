@@ -16,11 +16,26 @@ class FixedTermInvestment {
 
 const listFriends = document.getElementById('listFriends');
 
-// Botón para plazo fijo grupal
+function btnPress(btnId, action){
+    let button = document.getElementById(btnId)
+    button.addEventListener("click", action)
+}
 
-function removeElementLi() {
-    while ( listFriends.firstChild ) {
-        listFriends.removeChild( listFriends.firstChild );
+btnPress("groupButton", groupButton);
+btnPress("soloButton", soloButton);
+btnPress("btn-remove", removeElementLi);
+
+function soloButton() {
+    const totalDeposit = prompt('Ingresa monto a invertir: ');
+    const days = prompt('Ingresa el tiempo en el cual deseas mantener el plazo fijo (NOTA: Mínimo 30 dias y Máximo un año).');
+    const rate = 0.35;
+    const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
+
+    if (fixedTermInvestment.isTimeValid()) {
+        const profit = fixedTermInvestment.getProfit();
+        alert('Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.');
+    } else {
+        alert('El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
     }
 }
 
@@ -60,18 +75,8 @@ function groupButton() {
 
 }
 
-// Botón para plazo fijo individual
-
-function soloButton() {
-    const totalDeposit = prompt('Ingresa monto a invertir: ');
-    const days = prompt('Ingresa el tiempo en el cual deseas mantener el plazo fijo (NOTA: Mínimo 30 dias y Máximo un año).');
-    const rate = 0.35;
-    const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
-
-    if (fixedTermInvestment.isTimeValid()) {
-        const profit = fixedTermInvestment.getProfit();
-        alert('Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.');
-    } else {
-        alert('El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
+function removeElementLi() {
+    while ( listFriends.firstChild ) {
+        listFriends.removeChild( listFriends.firstChild );
     }
 }
