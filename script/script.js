@@ -41,10 +41,10 @@ function soloButton() {
         solo.appendChild(li);
         localStorage.setItem('soloTotalDeposit', totalDeposit);
         localStorage.setItem('soloDays', days);
+        document.getElementById('days').value = '';
+        document.getElementById('totalDeposit').value = '';
     } else {
-        const li = document.createElement('li');
-        li.textContent = 'La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $' + friendProfit.toFixed(2) + '.'
-        listFriends.appendChild(li);
+        invalid();
     }
 }
 
@@ -54,9 +54,11 @@ function getSolo() {
 }
 
 function removeSolo() {
-    localStorage.clear();
+    const li = document.getElementById('solo');
+    while (li.firstChild) {
+        li.removeChild(li.firstChild);
+    }
 }
-
 
 function groupButton() {
     const days = document.getElementById("groupDays").value;
@@ -72,20 +74,9 @@ function groupButton() {
             li.textContent = 'La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $' + friendProfit.toFixed(2) + '.'
             listFriends.appendChild(li);
         };
+        friends = [];
     } else {
-        let div = document.createElement('div');
-        div.className = 'alert alert-success';
-        let p = document.createElement('p');
-        p.textContent = 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.';
-        div.appendChild(p);
-        let button = document.createElement('button');
-        button.innerHTML = "Cerrar";
-        button.className = 'btn btn-success';
-        div.appendChild(button);
-        document.body.appendChild(div);
-        button.onclick = function () {
-            document.body.removeChild(div)
-        }
+        invalid();
     }
 }
 
@@ -98,6 +89,9 @@ function addFriend() {
     parseDeposit = parseFloat(deposit);
 
     if (friend != '' && deposit != '') {
+        if (friends.length === 0) {
+            removeElementLi();
+        }
         const li = document.createElement('li');
         li.textContent = friend + ' puso $' + parseDeposit + '.';
         listFriends.appendChild(li);
@@ -110,7 +104,23 @@ function addFriend() {
 }
 
 function removeElementLi() {
-    while ( listFriends.firstChild ) {
-        listFriends.removeChild( listFriends.firstChild );
+    while (listFriends.firstChild) {
+        listFriends.removeChild(listFriends.firstChild);
+    }
+}
+
+function invalid() {
+    let div = document.createElement('div');
+    div.className = 'alert alert-success';
+    let p = document.createElement('p');
+    p.textContent = 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.';
+    div.appendChild(p);
+    let button = document.createElement('button');
+    button.innerHTML = "Cerrar";
+    button.className = 'btn btn-success';
+    div.appendChild(button);
+    document.body.appendChild(div);
+    button.onclick = function () {
+        document.body.removeChild(div)
     }
 }

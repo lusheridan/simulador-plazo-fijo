@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Raleway:wght@200&display=swap" rel="stylesheet">
     <link href="./css/style.css" rel="stylesheet"/>
     <title>Simulador Plazo Fijo</title>
@@ -34,9 +33,9 @@
             <div class="btn-space" class="d-flex justify-content-center">
                 <button id="soloButton" class="btn btn-success">Calcular</button>
                 <button id="getSolo" class="btn btn-success">Repetir Anterior</button>
-                <button id="removeSolo" class="btn btn-success">Borrar Anterior</button>
+                <button id="removeSolo" class="btn btn-success">Borrar Resultados</button>
             </div>
-            <ul id="solo"></ul>
+            <div><ul id="solo"></ul></div>
         </section>
         <br>
         <section id="group">
@@ -47,7 +46,7 @@
                         <input type="text" class="form-control" id="friend">
                     </div>
                     <div class="mb-3">
-                        <label for="deposit" class="form-label">Monto</label>
+                        <label for="deposit" class="form-label">Monto:</label>
                         <input type="number" class="form-control" id="deposit">
                     </div>
                     <div class="mb-3">
@@ -57,8 +56,8 @@
                     </div>
                 </form>
                 <div class="btn-space" class="d-flex justify-content-center">
-                    <button id="addFriend" class="btn btn-success">Agregar</button>
-                    <button id="groupButton" class="btn btn-success">Calcular</button>
+                    <button id="addFriend" class="btn btn-success">Agregar Participante</button>
+                    <button id="groupButton" class="btn btn-success">Finalizar Cálculo</button>
                     <button id="btn-remove" class="btn btn-success">Borrar Resultados</button>
                 </div>
             <br>

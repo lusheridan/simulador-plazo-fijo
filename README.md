@@ -26,3 +26,11 @@
 - El resultado que el simulador arroja a través de varios alerts, será la ganancia total obtenida en los días que dure el Plazo Fijo. ~~pero además la ganancia individual de cada uno de los participantes~~.
 - El resultado de la ganancia individual en los plazos fijos grupales a partir de ahora será a través de una lista con elementos que van siendo creados a través del DOM.
 - Tambien se podran borrar estos resultados para "volver a empezar" a través del botón "borrar resultados".
+
+#### Updates para 2ºEntrega:
+- Se eliminan los alerts y los prompts.
+- Se agregan formularios para entrada de valores.
+- Ahora los errores por tiempo inválido se muestran manipulando el DOM.
+- Se hace uso de LocalStorage para poder repetir consultas anteriores.
+- Se crea función para vincular botones con funcionalidades y reciclar código.
+- Se crea función para que elemento del DOM se elimine a si mismo cuando se realiza evento, en este caso para un botón.
