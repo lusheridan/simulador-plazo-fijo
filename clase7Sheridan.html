@@ -4,32 +4,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafio Clase 6 y 7</title>
+    <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Raleway:wght@200&display=swap" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet"/>
+    <title>Simulador Plazo Fijo</title>
 </head>
-<body style="background-image: url('https://images.unsplash.com/photo-1579621970590-9d624316904b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');">
-    <div class="container">
+<body>
+    <header>
         <div class= "text-center">
             <h1>Simulador de Plazo Fijo</h1>
         </div>
+    </header>
+    <div class="container" id="box-area">     
+        <section>
+            <h3>Plazo Fijo Individual</h3>
+            <form>
+                <div class="mb-3">
+                    <label for="totalDeposit" class="form-label">Monto a Invertir:</label>
+                    <input type="number" class="form-control" id="totalDeposit">
+                </div>
+                    <div class="mb-3">
+                    <label for="days" class="form-label">Ingresa el tiempo por el cual deseas mantener el plazo fijo:</label>
+                    <input type="number" class="form-control" id="days" aria-describedby="help">
+                    <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
+                </div>
+                <ul>               
+                </ul>
+            </form>
+            <div class="btn-space" class="d-flex justify-content-center">
+                <button id="soloButton" class="btn btn-success">Calcular</button>
+                <button id="getSolo" class="btn btn-success">Repetir Anterior</button>
+                <button id="removeSolo" class="btn btn-success">Borrar Anterior</button>
+            </div>
+            <ul id="solo"></ul>
+        </section>
         <br>
-        <div class="d-flex justify-content-center">
-            <button id="soloButton" class="btn btn-success">Individual</button>
-        </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <button id="groupButton" class="btn btn-success">Grupal</button>
-        </div>
-        <br>
-        <div class="d-flex justify-content-center">
-            <button id="btn-remove" class="btn btn-success">Borrar Resultados</button>
-        </div>
-        <br>
-        <div>
-            <ul id="listFriends">               
-            </ul>
-        </div>
+        <section id="group">
+                <h3>Plazo Fijo Grupal</h3>
+                <form>        
+                    <div class="mb-3">
+                        <label for="friend" class="form-label">Participante:</label>
+                        <input type="text" class="form-control" id="friend">
+                    </div>
+                    <div class="mb-3">
+                        <label for="deposit" class="form-label">Monto</label>
+                        <input type="number" class="form-control" id="deposit">
+                    </div>
+                    <div class="mb-3">
+                        <label for="days" class="form-label">Ingresa el tiempo por el cual deseas mantener el plazo fijo:</label>
+                        <input type="number" class="form-control" id="groupDays" aria-describedby="help">
+                        <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
+                    </div>
+                </form>
+                <div class="btn-space" class="d-flex justify-content-center">
+                    <button id="addFriend" class="btn btn-success">Agregar</button>
+                    <button id="groupButton" class="btn btn-success">Calcular</button>
+                    <button id="btn-remove" class="btn btn-success">Borrar Resultados</button>
+                </div>
+            <br>
+            <div>
+                <ul id="listFriends"></ul>
+            </div>
+        </section>
     </div>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="./script.js"></script>
+    <script src="./script/script.js"></script>
 </body>
 </html>
