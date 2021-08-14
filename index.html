@@ -14,10 +14,11 @@
             <h1>Simulador de Plazo Fijo</h1>
         </div>
     </header>
-    <div class="container" id="box-area">     
+    <div class="container" id="box-area">
+        <div id="invalid"></div>
         <section>
             <h3>Plazo Fijo Individual</h3>
-            <form>
+            <form id="formSolo">
                 <div class="mb-3">
                     <label for="totalDeposit" class="form-label">Monto a Invertir:</label>
                     <input type="number" class="form-control" id="totalDeposit">
@@ -27,20 +28,18 @@
                     <input type="number" class="form-control" id="days" aria-describedby="help">
                     <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
                 </div>
-                <ul>               
-                </ul>
+                <div class="btn-space" class="d-flex justify-content-center">
+                    <input type="submit" class="btn btn-success" value="Calcular"/>
+                    <button id="getSolo" class="btn btn-success">Repetir Anterior</button>
+                    <button id="removeSolo" class="btn btn-success">Borrar Resultados</button>
+                </div>
             </form>
-            <div class="btn-space" class="d-flex justify-content-center">
-                <button id="soloButton" class="btn btn-success">Calcular</button>
-                <button id="getSolo" class="btn btn-success">Repetir Anterior</button>
-                <button id="removeSolo" class="btn btn-success">Borrar Resultados</button>
-            </div>
             <div><ul id="solo"></ul></div>
         </section>
         <br>
         <section id="group">
                 <h3>Plazo Fijo Grupal</h3>
-                <form>        
+                <form id="formGroup">
                     <div class="mb-3">
                         <label for="friend" class="form-label">Participante:</label>
                         <input type="text" class="form-control" id="friend">
@@ -54,12 +53,12 @@
                         <input type="number" class="form-control" id="groupDays" aria-describedby="help">
                         <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
                     </div>
+                    <div class="btn-space" class="d-flex justify-content-center">
+                        <button id="addFriend" class="btn btn-success">Agregar Participante</button>
+                        <input type="submit" class="btn btn-success" value="Finalizar Cálculo"/>
+                        <button id="btn-remove" class="btn btn-success">Borrar Resultados</button>
+                    </div>
                 </form>
-                <div class="btn-space" class="d-flex justify-content-center">
-                    <button id="addFriend" class="btn btn-success">Agregar Participante</button>
-                    <button id="groupButton" class="btn btn-success">Finalizar Cálculo</button>
-                    <button id="btn-remove" class="btn btn-success">Borrar Resultados</button>
-                </div>
             <br>
             <div>
                 <ul id="listFriends"></ul>
@@ -67,6 +66,7 @@
         </section>
     </div>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/script.js"></script>
 </body>
 </html>

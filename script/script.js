@@ -14,54 +14,78 @@ class FixedTermInvestment {
     }
 }
 
-const listFriends = document.getElementById('listFriends');
+const formSolo = $('#formSolo');
+const btnGetSolo = $('#getSolo');
+const btnRemoveSolo = $('#removeSolo');
 
-function btnPress(btnId, action){
-    let button = document.getElementById(btnId)
-    button.addEventListener("click", action)
-}
+const formGroup = $('#formGroup');
+const btnAddFriend = $('#addFriend');
 
-btnPress("groupButton", groupButton);
-btnPress("soloButton", soloButton);
-btnPress("btn-remove", removeElementLi);
-btnPress("getSolo", getSolo);
-btnPress("removeSolo", removeSolo);
-btnPress("addFriend", addFriend);
+const totalDepositInput = $("#totalDeposit");
+const daysInput = $('#days');
+const soloUl = $('#solo');
+
+const friendInput = $('#friend');
+const depositInput = $('#deposit');
+
+btnGetSolo.on("click", function(event) {
+    event.preventDefault();
+    getSolo();
+});
+
+btnRemoveSolo.on("click", function(event) {
+    event.preventDefault();
+    removeSolo();
+});
+
+formSolo.submit(function(event) {
+    event.preventDefault();
+    soloButton();
+});
+
+btnAddFriend.on("click", function(event) {
+    event.preventDefault();
+    addFriend();
+});
+
+formGroup.submit(function(event) {
+    event.preventDefault();
+    groupButton();
+});
+
+const listFriends = $('#listFriends');
 
 function soloButton() {
-    const totalDeposit = document.getElementById("totalDeposit").value;
-    const days = document.getElementById("days").value;
+    const totalDeposit = totalDepositInput.val();
+    const days = daysInput.val();
     const rate = 0.35;
     const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
 
     if (fixedTermInvestment.isTimeValid()) {
         const profit = fixedTermInvestment.getProfit();
-        const li = document.createElement('li');
-        li.textContent = 'Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.';
-        solo.appendChild(li);
+        soloUl.append('<li>Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.</li>');
         localStorage.setItem('soloTotalDeposit', totalDeposit);
         localStorage.setItem('soloDays', days);
-        document.getElementById('days').value = '';
-        document.getElementById('totalDeposit').value = '';
+        daysInput.val('');
+        totalDepositInput.val('');
     } else {
         invalid();
     }
 }
 
 function getSolo() {
-    document.getElementById("totalDeposit").value = localStorage.getItem('soloTotalDeposit');
-    document.getElementById("days").value = localStorage.getItem('soloDays');
+    totalDepositInput.val(localStorage.getItem('soloTotalDeposit'));
+    daysInput.val(localStorage.getItem('soloDays'));
 }
 
 function removeSolo() {
-    const li = document.getElementById('solo');
-    while (li.firstChild) {
-        li.removeChild(li.firstChild);
-    }
+    soloUl.empty();
+    daysInput.val('');
+    totalDepositInput.val('');
 }
 
 function groupButton() {
-    const days = document.getElementById("groupDays").value;
+    const days = $('#groupDays').val();
     const rate = 0.35;
     const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
 
@@ -70,9 +94,7 @@ function groupButton() {
         const profit = fixedTermInvestment.getProfit();
         for (let i = 0; i < friends.length; i++) {
             let friendProfit = (friends[i].deposit / totalDeposit) * profit;
-            const li = document.createElement('li');
-            li.textContent = 'La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $' + friendProfit.toFixed(2) + '.'
-            listFriends.appendChild(li);
+            listFriends.append('<li>La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $' + friendProfit.toFixed(2) + '.</li>');
         };
         friends = [];
     } else {
@@ -84,43 +106,31 @@ let friends = [];
 let totalDeposit = 0;
 
 function addFriend() {
-    const friend = document.getElementById("friend").value;
-    const deposit = document.getElementById("deposit").value;
+    const friend = friendInput.val();
+    const deposit = depositInput.val();
     parseDeposit = parseFloat(deposit);
 
     if (friend != '' && deposit != '') {
         if (friends.length === 0) {
             removeElementLi();
         }
-        const li = document.createElement('li');
-        li.textContent = friend + ' puso $' + parseDeposit + '.';
-        listFriends.appendChild(li);
+        listFriends.append('<li>' + friend + ' puso $' + parseDeposit +'</li>');
         friends.push({name: friend, deposit: parseDeposit});
         totalDeposit += parseDeposit; 
-        document.getElementById("friend").value = '';
-        document.getElementById("deposit").value = '';
+        friendInput.val('');
+        depositInput.val('');
     }
 
 }
 
 function removeElementLi() {
-    while (listFriends.firstChild) {
-        listFriends.removeChild(listFriends.firstChild);
-    }
+    listFriends.empty();
 }
 
 function invalid() {
-    let div = document.createElement('div');
-    div.className = 'alert alert-success';
-    let p = document.createElement('p');
-    p.textContent = 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.';
-    div.appendChild(p);
-    let button = document.createElement('button');
-    button.innerHTML = "Cerrar";
-    button.className = 'btn btn-success';
-    div.appendChild(button);
-    document.body.appendChild(div);
-    button.onclick = function () {
-        document.body.removeChild(div)
-    }
+    const invalid = $('#invalid');
+    invalid.append('<div class="alert alert-success"><p>El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.</p><button class="btn btn-success" id="btnInvalid">Cerrar</button></div>');
+    $('#btnInvalid').on("click", function(){
+        invalid.empty();
+    })         
 }
