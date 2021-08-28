@@ -17,16 +17,19 @@ class FixedTermInvestment {
 const formSolo = $('#formSolo');
 const btnGetSolo = $('#getSolo');
 const btnRemoveSolo = $('#removeSolo');
-
 const formGroup = $('#formGroup');
 const btnAddFriend = $('#addFriend');
-
 const totalDepositInput = $("#totalDeposit");
 const daysInput = $('#days');
 const soloUl = $('#solo');
-
 const friendInput = $('#friend');
 const depositInput = $('#deposit');
+const btnUsdRates = $('#btn-rates');
+const btnRemoveGroup = $('#btn-remove-group')
+const groupDaysInput = $('#groupDays');
+const listFriends = $('#listFriends');
+let friends = [];
+let totalDeposit = 0;
 
 btnGetSolo.on("click", function(event) {
     event.preventDefault();
@@ -53,7 +56,15 @@ formGroup.submit(function(event) {
     groupButton();
 });
 
-const listFriends = $('#listFriends');
+btnUsdRates.on("click", function(event) {
+    event.preventDefault();
+    usdRates()
+});
+
+btnRemoveGroup.on("click", function(event) {
+    event.preventDefault();
+    removeGroup();
+});
 
 function soloButton() {
     const totalDeposit = totalDepositInput.val();
@@ -63,13 +74,13 @@ function soloButton() {
 
     if (fixedTermInvestment.isTimeValid()) {
         const profit = fixedTermInvestment.getProfit();
-        soloUl.append('<li>Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.</li>');
+        soloUl.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.</p></div></div>');
         localStorage.setItem('soloTotalDeposit', totalDeposit);
         localStorage.setItem('soloDays', days);
         daysInput.val('');
         totalDepositInput.val('');
     } else {
-        invalid();
+        invalid('invalid-solo');
     }
 }
 
@@ -84,8 +95,15 @@ function removeSolo() {
     totalDepositInput.val('');
 }
 
+function removeGroup() {
+    listFriends.empty();
+    groupDaysInput.val('');
+    friendInput.val('');
+    depositInput.val('');
+}
+
 function groupButton() {
-    const days = $('#groupDays').val();
+    const days = groupDaysInput.val();
     const rate = 0.35;
     const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
 
@@ -98,12 +116,9 @@ function groupButton() {
         };
         friends = [];
     } else {
-        invalid();
+        invalid('invalid-group');
     }
 }
-
-let friends = [];
-let totalDeposit = 0;
 
 function addFriend() {
     const friend = friendInput.val();
@@ -127,10 +142,31 @@ function removeElementLi() {
     listFriends.empty();
 }
 
-function invalid() {
-    const invalid = $('#invalid');
-    invalid.append('<div class="alert alert-success"><p>El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.</p><button class="btn btn-success" id="btnInvalid">Cerrar</button></div>');
-    $('#btnInvalid').on("click", function(){
-        invalid.empty();
+function invalid(divId) {
+    const invalid = $('#' + divId);
+    invalid.append('<div class="alert alert-danger"><p>El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.</p><button class="btn btn-danger" id="btn-'+ divId + '">Cerrar</button></div>');
+    invalid.hide().fadeIn()
+    $('#btn-'+ divId).on("click", function(event){
+        event.preventDefault();
+        invalid.fadeOut(300, function() {
+            $(this).empty();
+        });
     })         
+}
+
+function usdRates() {
+    const URL = 'data/usdRates.json';
+    const load =$('#load');
+    load.append('<div class="d-flex justify-content-center"><div class="spinner-border text-success" role="status"><span class="sr-only"></span></div></div>')  
+    $.getJSON(URL, function(response, status){
+        load.empty();
+        const findName = $('#rates').val();
+        if(status === 'success') {
+            const rate = response.find(rate => rate.id === findName);
+            load.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">' + rate.nombre + rate.compra + rate.venta + '</p></div></div>');
+        }
+        else{
+            load.append('<div class="alert alert-danger"><p>Algo salió mal... Intenta de nuevo más tarde.</p><button class="btn btn-danger" id="btnInvalid">Cerrar</button></div>')
+        }
+    })
 }

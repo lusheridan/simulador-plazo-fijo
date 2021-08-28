@@ -1,0 +1,21 @@
+[{  "id": "1",
+    "compra": "96,97",
+    "venta": "102,97",
+    "nombre": "Dolar Oficial"
+}, {"id": "2",
+    "compra": "178,50",
+    "venta": "181,50",
+    "nombre": "Dolar Blue"
+}, {"id": "3",
+    "compra": "171,95",
+    "venta": "172,74",
+    "nombre": "Dolar Contado con Liqui"
+}, {"id": "4",
+    "compra": "171,460",
+    "venta": "171,400",
+    "nombre": "Dolar Bolsa"
+}, {"id": "5",
+    "nombre": "Dolar turista",
+    "compra": "No Cotiza",
+    "venta": "169,90"
+}]

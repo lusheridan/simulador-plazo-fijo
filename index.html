@@ -15,8 +15,7 @@
         </div>
     </header>
     <div class="container" id="box-area">
-        <div id="invalid"></div>
-        <section>
+        <section id="soloSection">
             <h3>Plazo Fijo Individual</h3>
             <form id="formSolo">
                 <div class="mb-3">
@@ -28,16 +27,17 @@
                     <input type="number" class="form-control" id="days" aria-describedby="help">
                     <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
                 </div>
+                <div><ul id="solo"></ul></div>
+                <div id="invalid-solo"></div>
                 <div class="btn-space" class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Calcular"/>
                     <button id="getSolo" class="btn btn-success">Repetir Anterior</button>
                     <button id="removeSolo" class="btn btn-success">Borrar Resultados</button>
                 </div>
             </form>
-            <div><ul id="solo"></ul></div>
         </section>
         <br>
-        <section id="group">
+        <section id="groupSection">
                 <h3>Plazo Fijo Grupal</h3>
                 <form id="formGroup">
                     <div class="mb-3">
@@ -56,13 +56,32 @@
                     <div class="btn-space" class="d-flex justify-content-center">
                         <button id="addFriend" class="btn btn-success">Agregar Participante</button>
                         <input type="submit" class="btn btn-success" value="Finalizar Cálculo"/>
-                        <button id="btn-remove" class="btn btn-success">Borrar Resultados</button>
+                        <button id="btn-remove-group" class="btn btn-success">Borrar Resultados</button>
                     </div>
                 </form>
             <br>
             <div>
                 <ul id="listFriends"></ul>
+                <div id=invalid-group></div>
             </div>
+        </section>
+    </div>
+    <div class="container">
+        <section id="ratesSection">
+            <div class="btn-space">
+                <select id="rates" class="custom-select">
+                    <option value="1">Dolar Blue</option>
+                    <option value="2">Dolar Oficial</option>
+                    <option value="3">Dolar Contado con Liqui</option>
+                    <option value="4">Dolar Bolsa</option>
+                    <option value="5">Dolar Turista</option>
+                </select>
+                <div>
+                    <button id="btn-rates" class="btn btn-success">Calcular</button>
+                </div>
+            </div>
+            <div id="load"></div>
+            <div id="invalid-load"></div>
         </section>
     </div>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
