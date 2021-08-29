@@ -14,20 +14,20 @@ class FixedTermInvestment {
     }
 }
 
-const formSolo = $('#formSolo');
-const btnGetSolo = $('#getSolo');
-const btnRemoveSolo = $('#removeSolo');
-const formGroup = $('#formGroup');
-const btnAddFriend = $('#addFriend');
-const totalDepositInput = $("#totalDeposit");
+const formSolo = $('#form-solo');
+const formGroup = $('#form-group');
+const btnGetSolo = $('#get-solo');
+const btnRemoveSolo = $('#remove-solo');
+const btnAddFriend = $('#add-friend');
+const btnUsdRates = $('#btn-rates');
+const btnRemoveGroup = $('#btn-remove-group')
+const totalDepositInput = $("#total-deposit");
 const daysInput = $('#days');
 const soloUl = $('#solo');
 const friendInput = $('#friend');
 const depositInput = $('#deposit');
-const btnUsdRates = $('#btn-rates');
-const btnRemoveGroup = $('#btn-remove-group')
-const groupDaysInput = $('#groupDays');
-const listFriends = $('#listFriends');
+const groupDaysInput = $('#group-days');
+const listFriends = $('#list-friends');
 let friends = [];
 let totalDeposit = 0;
 
@@ -112,7 +112,7 @@ function groupButton() {
         const profit = fixedTermInvestment.getProfit();
         for (let i = 0; i < friends.length; i++) {
             let friendProfit = (friends[i].deposit / totalDeposit) * profit;
-            listFriends.append('<li>La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $' + friendProfit.toFixed(2) + '.</li>');
+            listFriends.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $ ' + friendProfit.toFixed(2) + '</p></div></div>');
         };
         friends = [];
     } else {
@@ -163,7 +163,7 @@ function usdRates() {
         const findName = $('#rates').val();
         if(status === 'success') {
             const rate = response.find(rate => rate.id === findName);
-            load.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">' + rate.nombre + rate.compra + rate.venta + '</p></div></div>');
+            load.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">' +' '+ 'Compra: $' + rate.compra + ' // ' + 'Venta: $' + rate.venta + '</p></div></div>');
         }
         else{
             load.append('<div class="alert alert-danger"><p>Algo salió mal... Intenta de nuevo más tarde.</p><button class="btn btn-danger" id="btnInvalid">Cerrar</button></div>')

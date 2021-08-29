@@ -17,7 +17,7 @@
 - Una vez que se termina con la carga de datos, se coloca NO o cualquier palabra que sea distinta de SI y el simulador va a solicitar la cantidad de días para determinar la duración del plazo fijo.
 - El interés utilizado para la simulación es de 35% anual.
 - No hay un monto mínimo para el depósito, ni monto máximo.
-- El resultado que el simulador arroja a través de varios alerts, será la ganancia total obtenida en los días que dure el Plazo Fijo. ~~pero además la ganancia individual de cada uno de los participantes~~.
+- El resultado que el simulador arroja a través de varios alerts, será la ganancia total obtenida en los días que dure el Plazo Fijo.
 - El resultado de la ganancia individual en los plazos fijos grupales a partir de ahora será a través de una lista con elementos que van siendo creados a través del DOM.
 - Tambien se podran borrar estos resultados para "volver a empezar" a través del botón "borrar resultados".
 
@@ -43,3 +43,5 @@
 - Se modifica la función "Invalid" para que pueda ser reutilizada.
 - Se agregan efectos de JQuery a elementos que son creados y/o eliminados modificando el DOM.
 - Se agrega una sección para ver cotizaciones de moneda extranjera, en este caso del dolar, a través de la consulta a un JSON estático, utilizando ajax.
+- Se modifica el color de aquellos alerts que representen errores, ahora son rojos.
+- Se modifica nombre de variables en documentos HTML y Js para que mantengan la misma estructura.

@@ -25,7 +25,10 @@ h1, h3 {
     justify-content: space-evenly;
 }
 
-#box-area {
+.box-area {
     background: rgba(255, 255, 255, 0.65);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 

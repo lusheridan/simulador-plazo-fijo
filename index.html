@@ -14,13 +14,13 @@
             <h1>Simulador de Plazo Fijo</h1>
         </div>
     </header>
-    <div class="container" id="box-area">
-        <section id="soloSection">
+    <div class="container box-area">
+        <section id="solo-section">
             <h3>Plazo Fijo Individual</h3>
-            <form id="formSolo">
+            <form id="form-solo">
                 <div class="mb-3">
-                    <label for="totalDeposit" class="form-label">Monto a Invertir:</label>
-                    <input type="number" class="form-control" id="totalDeposit">
+                    <label for="total-deposit" class="form-label">Monto a Invertir:</label>
+                    <input type="number" class="form-control" id="total-deposit">
                 </div>
                     <div class="mb-3">
                     <label for="days" class="form-label">Ingresa el tiempo por el cual deseas mantener el plazo fijo:</label>
@@ -31,57 +31,63 @@
                 <div id="invalid-solo"></div>
                 <div class="btn-space" class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Calcular"/>
-                    <button id="getSolo" class="btn btn-success">Repetir Anterior</button>
-                    <button id="removeSolo" class="btn btn-success">Borrar Resultados</button>
+                    <button id="get-solo" class="btn btn-success">Repetir Anterior</button>
+                    <button id="remove-solo" class="btn btn-success">Borrar Resultados</button>
                 </div>
             </form>
         </section>
         <br>
-        <section id="groupSection">
-                <h3>Plazo Fijo Grupal</h3>
-                <form id="formGroup">
-                    <div class="mb-3">
-                        <label for="friend" class="form-label">Participante:</label>
-                        <input type="text" class="form-control" id="friend">
+        <section id="group-section">
+            <h3>Plazo Fijo Grupal</h3>
+            <form id="form-group">
+                <div class="mb-3">
+                    <label for="friend" class="form-label">Participante:</label>
+                    <input type="text" class="form-control" id="friend">
+                </div>
+                <div class="mb-3">
+                    <label for="deposit" class="form-label">Monto:</label>
+                    <input type="number" class="form-control" id="deposit">
+                </div>
+                <div class="mb-3">
+                    <label for="days" class="form-label">Ingresa el tiempo por el cual deseas mantener el plazo fijo:</label>
+                    <input type="number" class="form-control" id="group-days" aria-describedby="help">
+                    <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
+                </div>
+                <div>
+                    <div>
+                        <ul id="list-friends"></ul>
+                        <div id=invalid-group></div>
                     </div>
-                    <div class="mb-3">
-                        <label for="deposit" class="form-label">Monto:</label>
-                        <input type="number" class="form-control" id="deposit">
-                    </div>
-                    <div class="mb-3">
-                        <label for="days" class="form-label">Ingresa el tiempo por el cual deseas mantener el plazo fijo:</label>
-                        <input type="number" class="form-control" id="groupDays" aria-describedby="help">
-                        <div id="help" class="form-text">(NOTA: Mínimo 30 dias y máximo un año).</div>
-                    </div>
-                    <div class="btn-space" class="d-flex justify-content-center">
-                        <button id="addFriend" class="btn btn-success">Agregar Participante</button>
-                        <input type="submit" class="btn btn-success" value="Finalizar Cálculo"/>
-                        <button id="btn-remove-group" class="btn btn-success">Borrar Resultados</button>
-                    </div>
-                </form>
+                </div>
+                <div class="btn-space" class="d-flex justify-content-center">
+                    <button id="add-friend" class="btn btn-success">Agregar Participante</button>
+                    <input type="submit" class="btn btn-success" value="Finalizar Cálculo"/>
+                    <button id="btn-remove-group" class="btn btn-success">Borrar Resultados</button>
+                </div>
+            </form>
             <br>
-            <div>
-                <ul id="listFriends"></ul>
-                <div id=invalid-group></div>
-            </div>
         </section>
     </div>
-    <div class="container">
-        <section id="ratesSection">
-            <div class="btn-space">
-                <select id="rates" class="custom-select">
-                    <option value="1">Dolar Blue</option>
-                    <option value="2">Dolar Oficial</option>
-                    <option value="3">Dolar Contado con Liqui</option>
-                    <option value="4">Dolar Bolsa</option>
-                    <option value="5">Dolar Turista</option>
-                </select>
-                <div>
-                    <button id="btn-rates" class="btn btn-success">Calcular</button>
-                </div>
-            </div>
-            <div id="load"></div>
-            <div id="invalid-load"></div>
+    <div class="container box-area">
+        <section id="rates-section">
+            <h3>Cotizaciones</h3>
+                <form id="form-rates">
+                    <div class="mb-3">
+                        <label for="rates" class="form-label">Cotización Dolar:</label>
+                        <select id="rates" class="form-select" aria-label="Default select example">
+                            <option value="1">Dolar Oficial</option>
+                            <option value="2">Dolar Blue</option>
+                            <option value="3">Dolar Contado con Liqui</option>
+                            <option value="4">Dolar Bolsa</option>
+                            <option value="5">Dolar Turista</option>
+                        </select>
+                    </div>
+                    <div id="load"></div>
+                    <div id="invalid-load"></div>
+                    <div class="btn-space" class="d-flex justify-content-center">
+                        <button id="btn-rates" class="btn btn-success">Calcular</button>
+                    </div>
+                </form>
         </section>
     </div>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
