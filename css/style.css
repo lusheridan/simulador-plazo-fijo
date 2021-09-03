@@ -32,3 +32,13 @@ h1, h3 {
     margin-bottom: 4rem;
 }
 
+.btn-box {
+    padding-bottom: 2rem;
+    margin-bottom: 4rem;
+}
+
+#to-top {
+    display: flex;
+    float: right;
+    
+}

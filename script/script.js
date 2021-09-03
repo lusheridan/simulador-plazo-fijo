@@ -20,7 +20,7 @@ const btnGetSolo = $('#get-solo');
 const btnRemoveSolo = $('#remove-solo');
 const btnAddFriend = $('#add-friend');
 const btnUsdRates = $('#btn-rates');
-const btnRemoveGroup = $('#btn-remove-group')
+const btnRemoveGroup = $('#btn-remove-group');
 const totalDepositInput = $("#total-deposit");
 const daysInput = $('#days');
 const soloUl = $('#solo');
@@ -74,7 +74,9 @@ function soloButton() {
 
     if (fixedTermInvestment.isTimeValid()) {
         const profit = fixedTermInvestment.getProfit();
+        soloUl.hide();
         soloUl.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">Tu ganancia en ' + days + ' dias será de $' + profit.toFixed(2) + '.</p></div></div>');
+        soloUl.fadeIn();
         localStorage.setItem('soloTotalDeposit', totalDeposit);
         localStorage.setItem('soloDays', days);
         daysInput.val('');
@@ -90,13 +92,17 @@ function getSolo() {
 }
 
 function removeSolo() {
-    soloUl.empty();
+    soloUl.fadeOut(300, function() {
+        $(this).empty();
+    });
     daysInput.val('');
     totalDepositInput.val('');
 }
 
 function removeGroup() {
-    listFriends.empty();
+    listFriends.fadeOut(300, function() {
+        $(this).empty();
+    });
     groupDaysInput.val('');
     friendInput.val('');
     depositInput.val('');
@@ -110,10 +116,12 @@ function groupButton() {
     if (fixedTermInvestment.isTimeValid()) {
         removeElementLi();
         const profit = fixedTermInvestment.getProfit();
+        listFriends.hide();
         for (let i = 0; i < friends.length; i++) {
             let friendProfit = (friends[i].deposit / totalDeposit) * profit;
             listFriends.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">La ganancia de ' + friends[i].name + ' en ' + days + ' dias será de $ ' + friendProfit.toFixed(2) + '</p></div></div>');
         };
+        listFriends.fadeIn();
         friends = [];
     } else {
         invalid('invalid-group');
@@ -129,7 +137,9 @@ function addFriend() {
         if (friends.length === 0) {
             removeElementLi();
         }
+        listFriends.hide();
         listFriends.append('<li>' + friend + ' puso $' + parseDeposit +'</li>');
+        listFriends.fadeIn();
         friends.push({name: friend, deposit: parseDeposit});
         totalDeposit += parseDeposit; 
         friendInput.val('');
@@ -170,3 +180,7 @@ function usdRates() {
         }
     })
 }
+
+$("#to-top").click(function () {
+    $("html, body").animate({scrollTop: 0}, 50);
+});
