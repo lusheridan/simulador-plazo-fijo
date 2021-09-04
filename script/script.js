@@ -96,10 +96,9 @@ function soloButton() {
         localStorage.setItem('soloDays', days);
         daysInput.val('');
         totalDepositInput.val('');
-    } else if (!fixedTermInvestment.isDepositValid()){
+    } else if (!fixedTermInvestment.isDepositValid()) {
         invalidMessage('invalid-solo', 'El monto ingresado debe ser mayor a $1.');
-    }
-    else {
+    } else {
         invalidMessage('invalid-solo', 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
     }
 }
@@ -143,8 +142,7 @@ function groupButton() {
         friends = [];
     } else if (!fixedTermInvestment.isDepositValid()){
         invalidMessage('invalid-group', 'El monto ingresado debe ser mayor a $1.');
-    }
-    else {
+    } else {
         invalidMessage('invalid-group', 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
     }
 }
@@ -180,7 +178,7 @@ function invalidMessage(divId, errorMessage) {
     btnCount++;
     invalid.append('<div class="alert alert-danger"><p>' + errorMessage + '</p><button class="btn btn-danger" id="btn-'+ divId + '-' + btnCount + '">Cerrar</button></div>');
     invalid.hide().fadeIn()
-    $('#btn-'+ divId + '-' + btnCount).on("click", function(event){
+    $('#btn-'+ divId + '-' + btnCount).on("click", function(event) {
         event.preventDefault();
         invalid.fadeOut(300, function() {
             $(this).empty();
@@ -198,8 +196,7 @@ function usdRates() {
         if(status === 'success') {
             const rate = response.find(rate => rate.id === findName);
             load.append('<div class="card border-success mb-3" style="margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">' +' '+ 'Compra: $' + rate.compra + ' // ' + 'Venta: $' + rate.venta + '</p></div></div>');
-        }
-        else{
+        } else {
             load.append('<div class="alert alert-danger"><p>Algo salió mal... Intenta de nuevo más tarde.</p><button class="btn btn-danger" id="btnInvalid">Cerrar</button></div>')
         }
     })

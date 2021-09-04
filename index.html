@@ -10,8 +10,28 @@
 </head>
 <body>
     <header>
-        <div class= "text-center">
-            <h1>Simulador de Plazo Fijo</h1>
+        <div class="container box-area">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                <a class="navbar-brand" href="#top"><h1>Simulador de Plazo Fijo</h1></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#solo-section">Individual</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#group-section">Grupal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#rates-section">Dolar HOY</a>
+                        </li>
+                    </ul>
+                    </form>
+                </div>
+            </nav>
         </div>
     </header>
     <div class="container box-area">
@@ -49,8 +69,10 @@
                         <label class="form-check-label" for="inlineRadio5">Galicia</label>
                       </div>
                 </div>
-                <div><ul id="solo"></ul></div>
-                <div id="invalid-solo"></div>
+                <div>
+                    <div><ul id="solo"></ul></div>
+                    <div id="invalid-solo"></div>
+                </div>
                 <div class="btn-space" class="d-flex justify-content-center">
                     <input type="submit" class="btn btn-success" value="Calcular"/>
                     <button id="get-solo" class="btn btn-success">Repetir Anterior</button>
@@ -134,10 +156,13 @@
                 </form>
         </section>
     </div>
-    <div class="container btn-box">
-        <button id="to-top" class="btn btn-success btn-lg">Volver Arriba</button>
+    <div class="container box-area">
+        <footer class="text-center">
+                        <button id="to-top" class="btn btn-success btn-lg">Volver Arriba</button>
+        </footer>
     </div>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="./script/script.js"></script>
 </body>
