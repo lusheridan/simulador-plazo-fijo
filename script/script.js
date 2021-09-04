@@ -14,7 +14,7 @@ class FixedTermInvestment {
     }
 
     isDepositValid() {
-        return this.totalDeposit >= 1;
+        return this.totalDeposit >= 15000;
     }
 }
 
@@ -30,7 +30,7 @@ const daysInput = $('#days');
 const soloUl = $('#solo');
 const friendInput = $('#friend');
 const depositInput = $('#deposit');
-const groupDaysInput = $('#group-days');
+const groupDaysInput = $('#range');
 const listFriends = $('#list-friends');
 let friends = [];
 let totalDeposit = 0;
@@ -97,7 +97,7 @@ function soloButton() {
         daysInput.val('');
         totalDepositInput.val('');
     } else if (!fixedTermInvestment.isDepositValid()) {
-        invalidMessage('invalid-solo', 'El monto ingresado debe ser mayor a $1.');
+        invalidMessage('invalid-solo', 'El monto ingresado debe ser mayor a $15000.');
     } else {
         invalidMessage('invalid-solo', 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
     }
@@ -120,9 +120,9 @@ function removeGroup() {
     listFriends.fadeOut(300, function() {
         $(this).empty();
     });
-    groupDaysInput.val('');
     friendInput.val('');
     depositInput.val('');
+    friends = [];
 }
 
 function groupButton() {
@@ -130,7 +130,7 @@ function groupButton() {
     const rate = banksRates[$("input[name='bank-rate']:checked").val()];
     const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
 
-    if (fixedTermInvestment.isTimeValid() && fixedTermInvestment.isDepositValid()) {
+    if (fixedTermInvestment.isTimeValid() && friends.length > 1 && totalDeposit >= 15000) {
         removeElementLi();
         const profit = fixedTermInvestment.getProfit();
         listFriends.hide();
@@ -140,8 +140,10 @@ function groupButton() {
         };
         listFriends.fadeIn();
         friends = [];
-    } else if (!fixedTermInvestment.isDepositValid()){
-        invalidMessage('invalid-group', 'El monto ingresado debe ser mayor a $1.');
+    } else if (friends.length <= 1) {
+        invalidMessage('invalid-group', 'Debes ingresar al menos dos participantes para el Plazo Fijo Grupal.');
+    } else if (totalDeposit < 15000) {
+        invalidMessage('invalid-group', 'Entre todos los participantes deben ingresar al menos $15000.');
     } else {
         invalidMessage('invalid-group', 'El plazo no es válido, recuerda que el mínimo es 30 dias y el máximo un año.');
     }
@@ -153,7 +155,7 @@ function addFriend() {
     parseDeposit = parseFloat(deposit);
     if (friend == '') {
         invalidMessage('invalid-group', 'El campo de "Participante" no puede quedar vacío');
-    } else if(deposit == '' || deposit <= 1) {
+    } else if(deposit == '' || deposit < 1) {
         invalidMessage('invalid-group', 'Debes completar el monto con un numero mayor a $1');
     } else {
         if (friends.length === 0) {
@@ -205,3 +207,16 @@ function usdRates() {
 $("#to-top").click(function () {
     $("html, body").animate({scrollTop: 0}, 50);
 });
+
+const
+  range = document.getElementById('range'),
+  rangeVal = document.getElementById('range-val'),
+  setValue = ()=>{
+    const
+      newValue = Number( (range.value - range.min) * 100 / (range.max - range.min) ),
+      newPosition = 10 - (newValue * 0.2);
+    rangeVal.innerHTML = `<span>${range.value}</span>`;
+    rangeVal.style.left = `calc(${newValue}% + (${newPosition}px))`;
+  };
+document.addEventListener("DOMContentLoaded", setValue);
+range.addEventListener('input', setValue);
