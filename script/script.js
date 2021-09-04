@@ -35,6 +35,16 @@ const listFriends = $('#list-friends');
 let friends = [];
 let totalDeposit = 0;
 let btnCount = 0;
+let banksRates = {};
+
+$('document').ready(function() {
+    const URL = 'data/fixedTermRates.json';
+    $.getJSON(URL, function(response, status) {
+        if (status === 'success') {
+            banksRates = response;
+        }
+    });
+});
 
 btnGetSolo.on("click", function(event) {
     event.preventDefault();
@@ -74,7 +84,7 @@ btnRemoveGroup.on("click", function(event) {
 function soloButton() {
     const totalDeposit = totalDepositInput.val();
     const days = daysInput.val();
-    const rate = 0.35;
+    const rate = banksRates[$("input[name='bank-rate']:checked").val()];
     const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
 
     if (fixedTermInvestment.isTimeValid() && fixedTermInvestment.isDepositValid()) {
@@ -118,7 +128,7 @@ function removeGroup() {
 
 function groupButton() {
     const days = groupDaysInput.val();
-    const rate = 0.35;
+    const rate = banksRates[$("input[name='bank-rate']:checked").val()];
     const fixedTermInvestment = new FixedTermInvestment(days, totalDeposit, rate);
 
     if (fixedTermInvestment.isTimeValid() && fixedTermInvestment.isDepositValid()) {
@@ -182,12 +192,12 @@ function usdRates() {
     const URL = 'data/usdRates.json';
     const load =$('#load');
     load.append('<div class="d-flex justify-content-center"><div class="spinner-border text-success" role="status"><span class="sr-only"></span></div></div>')  
-    $.getJSON(URL, function(response, status){
+    $.getJSON(URL, function(response, status) {
         load.empty();
         const findName = $('#rates').val();
         if(status === 'success') {
             const rate = response.find(rate => rate.id === findName);
-            load.append('<div class="card border-success mb-3" style="max-width: 77rem; margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">' +' '+ 'Compra: $' + rate.compra + ' // ' + 'Venta: $' + rate.venta + '</p></div></div>');
+            load.append('<div class="card border-success mb-3" style="margin-top: 2rem"><div class="card-body text-dark"><p class="card-text text-center">' +' '+ 'Compra: $' + rate.compra + ' // ' + 'Venta: $' + rate.venta + '</p></div></div>');
         }
         else{
             load.append('<div class="alert alert-danger"><p>Algo salió mal... Intenta de nuevo más tarde.</p><button class="btn btn-danger" id="btnInvalid">Cerrar</button></div>')
